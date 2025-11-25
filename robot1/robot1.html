@@ -1,12 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="no">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="robot1.css">
+    <title>Bumblebee</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+<div class="page">
+
+    <!-- ØVERSTE RAD: BILDE + TEKST/SPECS -->
+    <div class="top-row">
+        <!-- Venstre: bilde -->
+        <div class="image-col">
+            <img src="img/bumblebee.png" alt="Bumblebee" class="robot-img">
+        </div>
+
+        <!-- Høyre: tekst + specs -->
+        <div class="content-col">
+
+            <div class="text-block">
+                <h1>Bumblebee</h1>
+
+                <p>
+                    Møt Bumblebee – en autonom, intelligent og høyeffektiv assistent
+                    bygget for mennesker som trenger styrke, hastighet og trygghet i ett eneste system.
+                </p>
+                <p>
+                    Dette er ikke en vanlig robot. Dette er en fullverdig partner som
+                    kombinerer presisjonsteknologi, avansert læring og uovertruffen mobilitet.
+                </p>
+                <p>
+                    Bumblebee responderer raskt, tilpasser seg miljøet rundt seg og håndterer krevende oppgaver.
+                    Enten det gjelder transport, overvåkning eller støtte i hverdagen, leverer Bumblebee med
+                    en pålitelighet som få andre systemer kan matche.
+                </p>
+                <p>
+                    Dette er roboten for deg som vil ha noe som faktisk gjør jobben – og som ser rå ut mens den gjør det.
+                </p>
+            </div>
+
+            <div class="specs">
+                <h3>Specs</h3>
+                <ul>
+                    <li>Vekt: 5 kg</li>
+                    <li>Høyde: 30 cm</li>
+                    <li>Batterilevetid: 8 timer</li>
+                    <li>Materiale: Resirkulert plast</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- NEDERSTE RAD: KONTAKT + BESTILL -->
+    <div class="bottom-row">
+
+        <div class="contact-box">
+            <p class="contact-title">Kontakt oss</p>
+            <p>470 67 767</p>
+            <p>Kirkegata 24, 0153 Oslo</p>
+        </div>
+
+        <button class="order-btn" id="orderBtn">Bestill</button>
+
+    </div>
+
+</div>
+
+<!-- POPUP-BOKS -->
+<div id="popup" class="popup">
+    <div class="popup-box">
+        <h2>Gratulerer!</h2>
+        <p>Bestillingen din er mottatt 🎉</p>
+        <button id="closePopup">Lukk</button>
+    </div>
+</div>
+
+<script>
+    const popup = document.getElementById("popup");
+    const closePopup = document.getElementById("closePopup");
+    const orderBtn = document.getElementById("orderBtn");
+
+    orderBtn.addEventListener("click", () => {
+        popup.classList.add("show");
+        startConfetti();
+    });
+
+    closePopup.addEventListener("click", () => {
+        popup.classList.remove("show");
+    });
+
+    // Enkel konfetti
+    function startConfetti() {
+        for (let i = 0; i < 40; i++) {
+            const conf = document.createElement("div");
+            conf.classList.add("confetti");
+            document.body.appendChild(conf);
+
+            const size = Math.random() * 8 + 6;
+            const colors = ["#ff3838", "#3cb371", "#ffd700", "#6a5acd", "#00bfff"];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            conf.style.width = size + "px";
+            conf.style.height = size * 1.4 + "px";
+            conf.style.background = color;
+            conf.style.left = Math.random() * 100 + "vw";
+            conf.style.animationDuration = (Math.random() + 1.5) + "s";
+            conf.style.animationDelay = (Math.random() * 0.5) + "s";
+
+            setTimeout(() => conf.remove(), 3000);
+        }
+    }
+</script>
+
 </body>
 </html>
