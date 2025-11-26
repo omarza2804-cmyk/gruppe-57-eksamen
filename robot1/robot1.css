@@ -1,13 +1,17 @@
-/* Bakgrunn og base-tekst */
+/* Grunnstil */
 body {
     margin: 0;
     padding: 20px;
-    background: linear-gradient(180deg, #000000, #001a66);
+    background: linear-gradient(180deg, #000, #001a66);
     font-family: "Open Sans", Arial, sans-serif;
-    color: #ffffff;
+    color: #fff;
     display: flex;
     justify-content: center;
     min-height: 100vh;
+}
+
+.toggle {
+    display: none;
 }
 
 /* Hovedramme */
@@ -16,70 +20,65 @@ body {
     width: 100%;
 }
 
-/* Øverste rad: bilde + tekst */
+/* Øverste rad */
 .top-row {
     display: flex;
     gap: 30px;
 }
 
-/* Venstre kolonne – bilde */
+/* Bildekolonne */
 .image-col {
     width: 350px;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
 }
 
 .robot-img {
     width: 100%;
-    height: auto;
     object-fit: contain;
-    transition: transform 0.25s ease-in-out;
+    transition: transform .25s;
 }
 
-/* Lett zoom ved hover */
 .robot-img:hover {
     transform: scale(1.05);
 }
 
-/* Høyre side – tekst + specs */
+/* Tekst + specs */
 .content-col {
     flex: 1;
     display: flex;
     gap: 40px;
 }
 
+/* Tekst */
 .text-block {
     flex: 2;
 }
 
 .text-block h1 {
-    margin-top: 0;
-    margin-bottom: 16px;
+    margin: 0 0 16px;
     font-size: 2.4rem;
 }
 
 .text-block p {
+    margin: 0 0 10px;
     line-height: 1.6;
-    margin-top: 0;
-    margin-bottom: 10px;
 }
 
-/* Specs-boks */
+/* Specs */
 .specs {
     flex: 1;
 }
 
 .specs h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
+    margin: 0 0 10px;
     color: #dcdcdc;
 }
 
 .specs ul {
-    list-style: none;
     padding: 0;
     margin: 0;
+    list-style: none;
 }
 
 .specs li {
@@ -95,7 +94,7 @@ body {
     color: #3cb371;
 }
 
-/* Nederste rad: kontakt + knapp */
+/* Kontakt + knapp */
 .bottom-row {
     display: flex;
     gap: 20px;
@@ -105,7 +104,7 @@ body {
 
 .contact-box {
     flex: 2;
-    background: rgba(130, 130, 150, 0.75);
+    background: rgba(130,130,150,0.75);
     border-radius: 10px;
     padding: 18px;
     text-align: center;
@@ -116,97 +115,91 @@ body {
     margin-bottom: 6px;
 }
 
-.contact-box p {
-    margin: 4px 0;
-}
-
-/* Bestill-knapp */
 .order-btn {
     flex: 1;
     padding: 16px;
     background: #3cb371;
-    border: none;
-    border-radius: 10px;
     color: #fff;
-    font-size: 1.1rem;
+    border-radius: 10px;
+    text-align: center;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: background .2s;
 }
 
 .order-btn:hover {
     background: #2e8b57;
 }
 
-/* Popup-bakgrunn */
+/* POPUP */
 .popup {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.55);
+    background: rgba(0,0,0,.55);
     display: flex;
     justify-content: center;
     align-items: center;
     visibility: hidden;
     opacity: 0;
-    transition: 0.25s ease;
-    z-index: 9999;
+    transition: .25s;
 }
 
-/* Når popup er synlig */
-.popup.show {
+.toggle:checked ~ .popup {
     visibility: visible;
     opacity: 1;
 }
 
-/* Selve popup-boksen */
 .popup-box {
     background: #22263e;
     padding: 30px 40px;
     border-radius: 12px;
     text-align: center;
-    color: white;
     width: 300px;
 }
 
-.popup-box button {
+.close-btn {
+    display: inline-block;
     margin-top: 15px;
     padding: 10px 20px;
-    border: none;
     background: #3cb371;
-    color: #fff;
-    font-size: 1rem;
     border-radius: 8px;
+    color: #fff;
     cursor: pointer;
 }
 
 /* Konfetti */
+.confetti-wrap {
+    pointer-events: none;
+    z-index: 99;
+}
+
 .confetti {
     position: fixed;
     top: -10px;
-    opacity: 0.9;
-    animation-name: fall;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
+    width: 8px;
+    height: 14px;
+    opacity: 0;
 }
+
+.toggle:checked ~ .confetti-wrap .confetti {
+    animation: fall 2.4s linear forwards;
+    opacity: 1;
+}
+
+/* Konfetti-varianter */
+.c1  { left: 10vw; background:#ff3838; }
+.c2  { left: 20vw; background:#ffd700; }
+.c3  { left: 30vw; background:#3cb371; }
+.c4  { left: 40vw; background:#6a5acd; }
+.c5  { left: 50vw; background:#00bfff; }
+.c6  { left: 60vw; background:#ff69b4; }
+.c7  { left: 70vw; background:#ff8c00; }
+.c8  { left: 80vw; background:#3cb371; }
+.c9  { left: 90vw; background:#ffd700; }
+.c10 { left: 95vw; background:#00bfff; }
 
 @keyframes fall {
     to {
-        transform: translateY(110vh) rotate(720deg);
-        opacity: 0.95;
-    }
-}
-
-/* Enkel mobiltilpasning */
-@media (max-width: 900px) {
-    .top-row {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .content-col {
-        flex-direction: column;
-    }
-
-    .order-btn {
-        width: 100%;
+        transform: translateY(110vh) rotate(700deg);
+        opacity: 0;
     }
 }
