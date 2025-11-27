@@ -205,6 +205,7 @@ body {
     }
 }
 
+/* Navigasjon */
 .nav-btn {
     display: inline-block;
     padding: 10px 16px;
@@ -252,4 +253,28 @@ body {
     flex-wrap: wrap;
     border: 1px solid rgba(255,255,255,0.25);
     backdrop-filter: blur(4px);
+}
+
+/* Bumblebee bil som kjører forbi – HØYRE → VENSTRE uten snuing */
+.bumblebee-car {
+    position: fixed;
+    bottom: 140px;
+    right: -200px;    /* starter utenfor høyre */
+    width: 140px;
+    height: auto;
+    z-index: 999999;
+    animation: car-drive 5s linear infinite; /* kan endres til forwards hvis du vil 1 gang */
+    pointer-events: none;
+}
+
+/* Animasjon: kjør fra høyre → venstre */
+@keyframes car-drive {
+    0% {
+        right: -250px;
+        opacity: 1;
+    }
+    100% {
+        right: calc(100vw + 250px);
+        opacity: 1;
+    }
 }
